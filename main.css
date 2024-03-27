@@ -1,0 +1,159 @@
+.button {
+    border-radius: 32px;
+    border: 1px;
+    border: 1px solid #976E72;
+    background-color: hsla(354, 16%, 51%, 1);
+    Padding: 6px 48px 6px 48px;
+}
+
+.bg {
+    background-color: #dfdede;
+    width: 1300px;
+    z-index: -1;
+    position: relative;
+    bottom: 80px;
+    height: 150px;
+}
+
+.car-type {
+    z-index: 1;
+}
+
+.cars {
+    position: relative;
+}
+
+.cardo {
+    border-radius: 40px;
+    z-index: 100;
+}
+
+.car {
+    border: none!important;
+    z-index: 0;
+}
+
+.card {
+    border-radius: 30px !important;
+    border: none !important;
+}
+
+nav {
+    z-index: 3;
+}
+
+.vector {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    z-index: 0;
+}
+
+.vector1 {
+    position: relative;
+    bottom: 75px;
+    Left: 100px;
+    width: 550px;
+    z-index: 1;
+    color: blue;
+    color: beige;
+    color: black;
+}
+
+ul {
+    list-style: none;
+}
+
+.cartImg {
+    width: 200px;
+}
+
+
+/* .btngroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+} */
+
+
+/* p{
+    width: 730px;
+   height:58px;
+
+    color:  #00000080;
+
+}
+.dne{
+    width: Fill (1,638px);
+    height: Hug (484px);
+    gap: 71px;
+} */
+
+
+/* .dne button{
+    width: Hug (242px);
+height: Hug (73px);
+padding: 16px, 48px, 16px, 48px;
+border-radius: 1000px;
+
+background: linear-gradient(0deg, #976E72, #976E72),
+linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+
+color: #FFFFFF;
+
+
+}
+.hero{
+    margin: 34px ;
+    height: Hug (196px);
+    padding: 48px, 76px, 48px, 76px;
+    border-radius: 77px;
+    gap: 10px;
+
+
+} */
+
+
+/* .d-flex button{
+    color:  #FFFFFF;
+   background-color:#976E72 ;
+   border-radius: 32px;
+   width: Fixed (195px);
+height: Fixed (67px);
+border-radius: 32px;
+
+}
+.d-flex{
+    width: Hug (1,558.57px);
+    justify-items: center;
+    box-shadow: 0px 0px 25px 0px #00000033 inset;
+
+} */
+
+
+/* .img h2 {
+    font-family: Righteous;
+    font-size: 69px;
+    font-weight: 400;
+    line-height: 86px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: center;
+
+} */
+
+.shopping {
+    background-color: rgb(25, 97, 186);
+    border-radius: 99px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    top: -2px;
+    position: absolute;
+    left: 1290px;
+    padding: 7px 7px;
+}
