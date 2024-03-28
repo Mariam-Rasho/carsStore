@@ -53,8 +53,8 @@ function increase() {
 var color;
 
 function getColor() {
-    console.log(window.getComputedStyle(event.target).backgroundColor);
-    color = window.getComputedStyle(event.target).backgroundColor;
+    console.log(event.target.style.backgroundColor);
+    color = event.target.style.backgroundColor;
 
 }
 
@@ -86,6 +86,6 @@ function addToCart(item) {
 
         items.push(car);
         localStorage.setItem("cart", JSON.stringify(items));
-        console.log(cart.length);
+        console.log(items.length);
     }
 }
