@@ -3,8 +3,8 @@
 // const cart = [];
 var id = 0;
 
-function addToCart(item) {
-    const car = { id: "", src: "", name: "", desc: "", price: "", count: "1", color: "white" };
+function addToCart(item, carItem) {
+    const car = { id: "", src: "", name: "", desc: "", price: "", count: "1", color: "", };
     // if (!cart.includes(car))
     const carImage = item.querySelector('.img').src;
     const title = item.querySelector('.card-title').innerText;
@@ -14,6 +14,7 @@ function addToCart(item) {
     car.name = title;
     car.desc = description;
     car.price = priceCar;
+    car.color = carItem.color ? "carItem.color" : "white";
     console.log(car.id);
     console.log(car.price);
     let items = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : [];
@@ -35,11 +36,13 @@ function showDetails(car) {
     const description = car.querySelector('h3').innerText;
     const priceCar = car.querySelector(".price").innerText;
     //cull del element on details page
-    const cars = { src: "", name: "", desc: "", price: "", count: "", };
+    const cars = { src: "", name: "", desc: "", price: "", count: "", color: "", };
     cars.src = carImage;
     cars.desc = description;
     cars.name = title;
     cars.price = priceCar;
+    console.log(item);
+    cars.color = `${item.color}`;
     if (!carDetail.find((item) => item.name === cars.name)) {
         carDetail = [];
         carDetail.push(cars);
@@ -48,75 +51,116 @@ function showDetails(car) {
 
 }
 
+// https://freetestapi.com/api/v1/cars?search=[query]
+// let carsArray = [];
+// fetch("https://freetestapi.com/api/v1/cars")
+//     .then(Response => Response.json())
+//     .then(data => {
+//         carsArray = data;
+//         console.log(carsArray);
+//         console.log(document.getElementById('btnSearch'));
+
+//         document.getElementById('btnSearch').addEventListener('click', function(event) {
+//             event.preventDefault(); // Prevent the default behavior
+//             let searchValue = document.getElementById('search').value;
+//             let crdo = document.querySelector(".cardo");
+
+//             //filter
+//             let item = carsArray.filter(item => item.model === searchValue)
+//             console.log(item);
+//             crdo.innerHTML = `<div class="col-4">
+//     <div class="card car" id="item">
+//         <img src="./OIP.jpg" class="img cardo">
+//         <div class="card-body">
+//             <div class="d-flex justify-content-around">
+//                 <h5 class="card-title text-center my-3">${item.make}</h5>
+//                 <h4 class="my-3">$<span class="price">${item.price}</span></h4>
+//             </div>
+//             <div class="container d-flex text-center my-3">
+//                 <h7 class="col"><img src="./footer/seat-svgrepo-com(1) 1.png" style="width: 15px;">Seator</h7>
+//                 <h7 class="col"><img src="./footer/wheel-to-control-vehicles-svgrepo-com(1) 2.png" style="width: 15px;">${item.transmission}</h7>
+//                 <h7 class="col"><img src="./footer/SVGRepo_iconCarrier.png" style="width: 15px;">5KM/1-t</h7>
+//             </div>
+//             <h3 class="text-center my-3" id="desc" style="color: black;">Starting at $500/Day</h3>
+//             <div class="d-flex justify-content-around">
+//                 <a class="btn fs-5 text-dark rounded-pill border border-secondary " href="./details.html" onclick="showDetails(item)">Details</a>
+//                 <button type="button" class="addtoCart button text-light fs-5 px-4" onclick="addToCart(item,${item})">Buy Now</button>
+//             </div>
+//         </div>
+//     </div>
+// </div>`
+//         });
+//     })
 
 
+let carsArray = [];
 
+fetch("https://freetestapi.com/api/v1/cars")
+    .then(Response => Response.json())
+    .then(data => {
+        carsArray = data;
+        console.log(carsArray);
+    });
+document.getElementById('btnSearch').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default behavior
+    let searchValue = document.getElementById('search').value;
+    let crdo = document.querySelector(".cardo");
+    //filter
+    let items = carsArray.filter(a => a.model == searchValue);
+    console.log(items);
+    items.forEach(item => {
+        crdo.innerHTML = `<div class="col-4">
+            <div class="card car" id="item">
+                <img src="./OIP.jpg" class="img cardo">
+                <div class="card-body">
+                    <div class="d-flex justify-content-around">
+                        <h5 class="card-title text-center my-3">${item.make}</h5>
+                        <h4 class="my-3">$<span class="price">${item.price}</span></h4>
+                    </div>
+                    <div class="container d-flex text-center my-3">
+                        <h7 class="col"><img src="./footer/seat-svgrepo-com(1) 1.png" style="width: 15px;">Seator</h7>
+                        <h7 class="col"><img src="./footer/wheel-to-control-vehicles-svgrepo-com(1) 2.png" style="width: 15px;">${item.transmission}</h7>
+                        <h7 class="col"><img src="./footer/SVGRepo_iconCarrier.png" style="width: 15px;">5KM/1-t</h7>
+                    </div>
+                    <h3 class="text-center my-3" id="desc" style="color: black;">Starting at $500/Day</h3>
+                    <div class="d-flex justify-content-around">
+                        <a class="btn fs-5 text-dark rounded-pill border border-secondary " href="./details.html" onclick="showDetails(item)">Details</a>
+                        <button type="button" class="addtoCart button text-light fs-5 px-4" onclick="addToCart(item,${item})">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>`
+    });
+});
 
-// if (!cart.find((item) => item.name === car.name)) {
-//     cart.push({...car }); // إضافة نسخة جديدة من الكائن car
-//     localStorage.setItem("cart", JSON.stringify(cart));
-//     console.log(cart.length);
-// } else {
-//     console.log("العنصر موجود بالفعل في السلة");
-// }
-
-// for (let i = 0; i < btnCart.length; i++) {
-//     btnCart[i].addEventListener('click', () => {
-//         let item = btnCart[i].parentNode.parentElement.parentElement;
-//         if (!cart.includes(item.innerHTML)) {
-//             cart.push(item.innerHTML);
-//             localStorage.setItem("cart", JSON.stringify(cart));
-//             console.log(cart.length);
-
-//         }
+//query
+// fetch(`https://freetestapi.com/api/v1/cars?search=${searchValue}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         data.forEach(item => {
+//             console.log(item);
+//             crdo.innerHTML = `<div class="col-4">
+//         <div class="card car" id="item">
+//             <img src="./OIP.jpg" class="img cardo">
+//             <div class="card-body">
+//                 <div class="d-flex justify-content-around">
+//                     <h5 class="card-title text-center my-3">${item.make}</h5>
+//                     <h4 class="my-3">$<span class="price">${item.price}</span></h4>
+//                 </div>
+//                 <div class="container d-flex text-center my-3">
+//                     <h7 class="col"><img src="./footer/seat-svgrepo-com(1) 1.png" style="width: 15px;">Seator</h7>
+//                     <h7 class="col"><img src="./footer/wheel-to-control-vehicles-svgrepo-com(1) 2.png" style="width: 15px;">${item.transmission}</h7>
+//                     <h7 class="col"><img src="./footer/SVGRepo_iconCarrier.png" style="width: 15px;">5KM/1-t</h7>
+//                 </div>
+//                 <h3 class="text-center my-3" id="desc" style="color: black;">Starting at $500/Day</h3>
+//                 <div class="d-flex justify-content-around">
+//                     <a class="btn fs-5 text-dark rounded-pill border border-secondary " href="./details.html" onclick="showDetails(item)">Details</a>
+//                     <button type="button" class="addtoCart button text-light fs-5 px-4" onclick="addToCart(item,${item})">Buy Now</button>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>`
+//         });
 
 //     });
-
-
-
-
-// function addtocart() {
-//     let item = btnCart[i].parentNode.parentElement.parentElement;
-//     cart.push(item.innerHTML);
-//     localStorage.setItem("cart", JSON.stringify(cart));
-//     console.log(cart.length);
-//   عرض عناصر السلة في صفحة السلة
-// قم بمسح أي عناصر سابقة في سلة الشراء
-// let items = JSON.parse(localStorage.getItem('cart'));
-// for (let i = 0; i < items.length; i++) {
-//     let cartItem = document.createElement('div');
-//     cartItem.innerHTML = items[i];
-//     homeCart.appendChild(cartItem);
-
-// }
-// }
-
-// function addToCart(image, name, price) {
-//   // Get car information
-//   var carImage = document.querySelector('img').src;
-//   var carName = document.querySelector('h5').innerText;
-//   var carPrice = document.querySelector('h3').innerText;
-
-//   // Create new row in the shopping cart table
-//   var table = document.getElementById('cartTable');
-//   var row = table.insertRow(1);
-//   var cell1 = row.insertCell(0);
-//   var cell2 = row.insertCell(1);
-//   var cell3 = row.insertCell(2);
-//   var cell4 = row.insertCell(3);
-//   cell1.innerHTML = '<img src="' + carImage + '" alt="Car Image">';
-//   cell2.innerHTML = carName;
-//   cell3.innerHTML = carPrice;
-//   cell4.innerHTML = '<button onclick="deleteItem(this)">Delete</button>';
-// // }
-
-// function addToCart(image,name, price) {
-//   // Add the selected car to the basket
-//   const car = { image,name, price };
-//   localStorage.setItem('selectedCar', JSON.stringify(car));
-//   window.location.href = 'detailsCars.html';
-// }
-// const openShopping =document.querySelector(".shopping");
-// const list =document.querySelector(".listCard")opping");
-// const list =document.querySelector(".listCard")opping");
-// const list =document.querySelector(".listCard")
+// console.log(searchValue);
